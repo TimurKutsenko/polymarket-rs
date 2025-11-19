@@ -44,7 +44,7 @@ pub struct BookEvent {
 }
 
 /// Price level in order book (price and size pair)
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct PriceLevel {
     /// Price at this level
     #[serde(with = "rust_decimal::serde::str")]
@@ -187,7 +187,7 @@ pub enum TradeStatus {
 }
 
 /// Maker order that was matched in a trade
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MakerOrder {
     /// Address of the maker
     pub maker_address: String,
@@ -259,14 +259,14 @@ pub struct OrderEvent {
 // ============================================================================
 
 /// Subscription message for market websocket
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MarketSubscription {
     /// List of asset/token IDs to subscribe to
     pub assets_ids: Vec<String>,
 }
 
 /// Authentication message for user websocket
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct UserAuthentication {
     /// Message type (always "user")
     #[serde(rename = "type")]
@@ -276,7 +276,7 @@ pub struct UserAuthentication {
 }
 
 /// Authentication credentials for user websocket
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct AuthCredentials {
     /// API key
     #[serde(rename = "apiKey")]

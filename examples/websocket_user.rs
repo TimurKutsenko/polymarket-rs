@@ -105,10 +105,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
             Err(e) => {
-                eprintln!("❌ Error: {}", e);
+                log::warn!("❌ Error: {}", e);
                 // The ReconnectingStream will automatically attempt to reconnect
                 // Continue processing to allow reconnection
-                eprintln!("⏳ Will attempt to reconnect...");
+                log::warn!("⏳ Will attempt to reconnect...");
             }
         }
     }

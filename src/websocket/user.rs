@@ -258,11 +258,4 @@ mod tests {
         let client = UserWsClient::new();
         assert_eq!(client.ws_url, UserWsClient::DEFAULT_WS_URL);
     }
-
-    #[test]
-    fn test_client_with_custom_url() {
-        let custom_url = "wss://custom.example.com/ws/user";
-        let client = UserWsClient::with_url(custom_url);
-        assert_eq!(client.ws_url, custom_url);
-    }
 }

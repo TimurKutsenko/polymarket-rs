@@ -9,9 +9,10 @@ pub enum AssetType {
 }
 
 /// Order side (BUY or SELL)
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "UPPERCASE")]
 pub enum Side {
+    #[default]
     #[serde(rename = "BUY")]
     Buy,
     #[serde(rename = "SELL")]
@@ -117,4 +118,18 @@ pub enum NotificationType {
     OrderExpired,
     BalanceUpdate,
     Other(String),
+}
+
+/// Activity type
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "UPPERCASE")]
+pub enum ActivityType {
+    #[default]
+    Trade,
+    Yield,
+    Reward,
+    Split,
+    Merge,
+    Conversion,
+    Redeem,
 }

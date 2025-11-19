@@ -79,7 +79,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
             Err(e) => {
-                eprintln!("❌ Error: {}", e);
+                log::warn!("❌ Error: {}", e);
                 break;
             }
         }
