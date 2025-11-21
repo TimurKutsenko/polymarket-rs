@@ -1,11 +1,10 @@
-use super::price::calculate_market_price;
 use super::rounding::{decimal_to_token_u32, fix_amount_rounding, ROUNDING_CONFIG};
 use crate::config::get_contract_config;
 use crate::error::{Error, Result};
 use crate::signing::{sign_order_message, EthSigner, Order};
 use crate::types::{
-    CreateOrderOptions, ExtraOrderArgs, MarketOrderArgs, OrderArgs, OrderSummary, Side,
-    SignatureType, SignedOrderRequest,
+    CreateOrderOptions, ExtraOrderArgs, MarketOrderArgs, OrderArgs, Side, SignatureType,
+    SignedOrderRequest,
 };
 use crate::utils::get_current_unix_time_secs;
 use alloy_primitives::{Address, U256};
@@ -122,21 +121,6 @@ impl OrderBuilder {
                 )
             }
         }
-    }
-
-    /// Calculate the price for a market order based on order book depth
-    ///
-    /// This walks the order book until enough liquidity is found to match
-    /// the requested amount.
-    ///
-    /// Note: This method delegates to the standalone `calculate_market_price` function.
-    /// Consider using that function directly if you don't need the OrderBuilder.
-    pub fn calculate_market_price(
-        &self,
-        positions: &[OrderSummary],
-        amount_to_match: Decimal,
-    ) -> Result<Decimal> {
-        calculate_market_price(positions, amount_to_match)
     }
 
     /// Create a market order

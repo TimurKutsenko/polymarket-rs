@@ -91,7 +91,7 @@ impl TradingClient {
         };
 
         // Calculate market price from order book
-        let price = calculate_market_price(book_side, order_args.amount)?;
+        let price = calculate_market_price(book_side, order_args.amount, order_args.side)?;
 
         self.order_builder
             .create_market_order(self.chain_id, order_args, price, extras, options)

@@ -1,6 +1,6 @@
-use crate::OrderId;
-
 use super::enums::{OrderType, Side};
+use crate::error::Result;
+use crate::{orders::calculate_market_price, OrderId};
 use alloy_primitives::U256;
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
@@ -236,6 +236,19 @@ pub struct OrderBookSummary {
     pub timestamp: u64,
     pub bids: Vec<OrderSummary>,
     pub asks: Vec<OrderSummary>,
+}
+
+impl OrderBookSummary {
+    pub fn calculate_market_price(&self, side: Side, shares_to_match: Decimal) -> Result<Decimal> {
+        calculate_market_price(
+            match side {
+                Side::Buy => &self.asks,
+                Side::Sell => &self.bids,
+            },
+            shares_to_match,
+            side,
+        )
+    }
 }
 
 /// Price and size at an order book level
