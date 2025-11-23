@@ -212,7 +212,7 @@ impl ClobClient {
         if let Some(p) = pagination {
             let params = p.to_query_params();
             if !params.is_empty() {
-                path.push('?');
+                path.push_str("?next_cursor=");
                 path.push_str(&params[0].1);
             }
         }
