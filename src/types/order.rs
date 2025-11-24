@@ -287,6 +287,19 @@ pub struct PostOrderResponse {
     pub success: bool,
 }
 
+/// Arguments for posting multiple orders
+#[derive(Debug, Clone)]
+pub struct PostOrderArgs {
+    pub order: SignedOrderRequest,
+    pub order_type: OrderType,
+}
+
+impl PostOrderArgs {
+    pub fn new(order: SignedOrderRequest, order_type: OrderType) -> Self {
+        Self { order, order_type }
+    }
+}
+
 /// Response from canceling orders
 ///
 /// This response is returned by:
