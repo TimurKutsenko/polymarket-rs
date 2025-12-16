@@ -13,9 +13,17 @@ pub struct HttpClient {
 
 impl HttpClient {
     pub fn new(base_url: impl Into<String>) -> Self {
+        use reqwest::header::{HeaderMap, HeaderValue, ACCEPT, CONNECTION, CONTENT_TYPE, USER_AGENT};
+
+        let mut headers = HeaderMap::new();
+        headers.insert(USER_AGENT, HeaderValue::from_static("py_clob_client"));
+        headers.insert(ACCEPT, HeaderValue::from_static("*/*"));
+        headers.insert(CONNECTION, HeaderValue::from_static("keep-alive"));
+        headers.insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
+
         Self {
             client: Client::builder()
-                .user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+                .default_headers(headers)
                 .build()
                 .expect("Failed to create HTTP client"),
             base_url: base_url.into(),
