@@ -14,7 +14,10 @@ pub struct HttpClient {
 impl HttpClient {
     pub fn new(base_url: impl Into<String>) -> Self {
         Self {
-            client: Client::new(),
+            client: Client::builder()
+                .user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+                .build()
+                .expect("Failed to create HTTP client"),
             base_url: base_url.into(),
         }
     }
